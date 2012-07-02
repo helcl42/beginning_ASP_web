@@ -1,0 +1,198 @@
+﻿*
+{
+  /* 
+    Defines the main font used throughout the entire site 
+  */
+  font-family: Verdana, Arial, Sans-Serif;
+}
+
+body
+{
+  /* 
+    Clears white space around the body and sets the background color to a dark grey.
+  */  
+  background-color: #464646;  
+}
+
+a
+{
+  /*
+    Clears the underline on normal links, and gives them #da6637 as the text color.
+  */
+  color: #da6637;
+  text-decoration: none;
+}
+
+a:hover
+{
+  /*
+    Underlines links when the user hovers the mouse over them.
+  */
+  text-decoration: underline;
+}
+
+h1
+{
+  /*
+    Makes h1 elements smaller than their browser default.
+  */
+  font-size: 20px;
+}
+
+#Header
+{
+  /*
+    Sets the background of the header to the same color as the right-hand side of the 
+    header image. This way, the header can expand to the right.
+    The margin at the bottom creates some room between the header and the menu and the main content.
+  */
+  background-color: #574536;
+  margin-bottom: 20px;
+}
+
+#Header a
+{
+  /*
+    The #Header a is nested in the #Header. It provides a link to the homepage,
+    and sets the header image background.
+  */
+  background-image: url(Images/Header.jpg);
+  background-repeat: no-repeat;
+  width: 944px;
+  height: 138px;
+  display: block;  
+}
+
+#MenuWrapper
+{
+  /*
+    Floats the entire menu on the left of the content.
+  */
+  width: 130px;
+  float: left;
+  padding: 10px;
+  padding-top: 0; /* Reset the top-padding. The first menu item (home) already adds some padding to its top to create room between the MenuWrapper and the first menu item */
+  background-color: #E1E1E1;
+  margin-left: 35px;
+  margin-right: 20px;
+  font-size: 0.8em;
+}
+
+.FirstLevelMenuItems
+{
+    padding-top: 10px;
+}
+
+#MainContent
+{
+  /*
+    Defines the main content area. The text color is white (on the gray background set on the body).
+    The #MainContent element has a minimum height of 370 pixels, but can grow if necessary.
+    The font-size is 80% of its parent element, which in this case comes down to 80% of the font
+    the user has specified as the default font in the browser.
+  */
+  color: white;
+  font-size: 0.8em;
+  width: 600px;
+  min-height: 370px;
+  padding: 10px;
+  float: left;
+}
+
+#Sidebar
+{
+  /*
+    The Sidebar is positioned absolutely at the right of the page.
+    It has the same font-size and color as #MainContent
+  */
+  font-size: 0.8em;
+  width: 124px;
+  color: White;
+  float: left;
+  padding-top: 10px;
+}
+
+#Footer
+{
+  /*
+    The footer is positioned below all other content.
+    At the top, it gets a border with a dashed style, while all other sides have no border.
+  */
+  text-align: center;
+  border-top: 2px dashed gray;
+  height: 37px;
+  clear: both;
+  background-color: #8B3818;
+}
+
+.Introduction
+{
+  font-style: italic;
+}
+
+img
+{
+  border: 0;
+}
+
+.ErrorMessage
+{
+  color: red;
+}
+
+.PleaseWait
+{
+  height: 32px;
+  width: 500px;
+  background-image: url(Images/PleaseWait.gif);
+  background-repeat: no-repeat;
+  padding-left: 40px;
+  line-height: 32px;
+}
+  
+   .style1
+  {
+    width: 100%;
+  }
+
+  .Attention
+  {
+      border: 4px solid black;
+      padding: 10px 0;
+      width: 100px;
+      margin: auto;
+      display: block;
+      text-align: center;
+  }
+  
+  
+ .Watermark
+  {
+      position: relative;
+      width: 0;
+      height: 1.25em;
+      vertical-align: top;
+  }
+  
+  .Watermark label
+  {
+      position: absolute;
+      left: 0px;
+      top: 2px;
+      white-space:nowrap;
+      color: #999;
+      padding-left: 4px;
+      height: 1.25em;
+      vertical-align: middle;
+  }
+  
+  .InputBox
+  {
+      width: 300px;
+  }
+  
+    
+  .ItemContainer
+  {
+      width:400px;
+  }

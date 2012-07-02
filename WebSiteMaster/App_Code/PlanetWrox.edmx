@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PlanetWroxModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="PlanetWroxModelStoreContainer">
+          <EntitySet Name="Genre" EntityType="PlanetWroxModel.Store.Genre" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PhotoAlbum" EntityType="PlanetWroxModel.Store.PhotoAlbum" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Picture" EntityType="PlanetWroxModel.Store.Picture" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Review" EntityType="PlanetWroxModel.Store.Review" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Picture_PhotoAlbum" Association="PlanetWroxModel.Store.FK_Picture_PhotoAlbum">
+            <End Role="PhotoAlbum" EntitySet="PhotoAlbum" />
+            <End Role="Picture" EntitySet="Picture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Genre" Association="PlanetWroxModel.Store.FK_Review_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="ToolTip" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ImageUrl" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="PhotoAlbumId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="GenreId" Type="int" Nullable="false" />
+          <Property Name="Authorized" Type="bit" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Picture_PhotoAlbum">
+          <End Role="PhotoAlbum" Type="PlanetWroxModel.Store.PhotoAlbum" Multiplicity="1" />
+          <End Role="Picture" Type="PlanetWroxModel.Store.Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoAlbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="PhotoAlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Genre">
+          <End Role="Genre" Type="PlanetWroxModel.Store.Genre" Multiplicity="1" />
+          <End Role="Review" Type="PlanetWroxModel.Store.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PlanetWroxModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="PlanetWroxEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Genre" EntityType="PlanetWroxModel.Genre" />
+          <EntitySet Name="Review" EntityType="PlanetWroxModel.Review" />
+          <AssociationSet Name="FK_Review_Genre" Association="PlanetWroxModel.FK_Review_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <EntitySet Name="PhotoAlbum" EntityType="PlanetWroxModel.PhotoAlbum" />
+          <EntitySet Name="Picture" EntityType="PlanetWroxModel.Picture" />
+          <AssociationSet Name="FK_Picture_PhotoAlbum" Association="PlanetWroxModel.FK_Picture_PhotoAlbum">
+            <End Role="PhotoAlbum" EntitySet="PhotoAlbum" />
+            <End Role="Picture" EntitySet="Picture" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reviews" Relationship="PlanetWroxModel.FK_Review_Genre" FromRole="Genre" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Summary" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GenreId" Type="Int32" Nullable="false" />
+          <Property Name="Authorized" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Genre" Relationship="PlanetWroxModel.FK_Review_Genre" FromRole="Review" ToRole="Genre" />
+        </EntityType>
+        <Association Name="FK_Review_Genre">
+          <End Role="Genre" Type="PlanetWroxModel.Genre" Multiplicity="1" />
+          <End Role="Review" Type="PlanetWroxModel.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PhotoAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pictures" Relationship="PlanetWroxModel.FK_Picture_PhotoAlbum" FromRole="PhotoAlbum" ToRole="Picture" />
+          <Property Type="String" Name="UserName" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ToolTip" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageUrl" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PhotoAlbumId" Nullable="false" />
+          <NavigationProperty Name="PhotoAlbum" Relationship="PlanetWroxModel.FK_Picture_PhotoAlbum" FromRole="Picture" ToRole="PhotoAlbum" />
+        </EntityType>
+        <Association Name="FK_Picture_PhotoAlbum">
+          <End Type="PlanetWroxModel.PhotoAlbum" Role="PhotoAlbum" Multiplicity="1" />
+          <End Type="PlanetWroxModel.Picture" Role="Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoAlbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="PhotoAlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PlanetWroxModelStoreContainer" CdmEntityContainer="PlanetWroxEntities">
+          <EntitySetMapping Name="Genre"><EntityTypeMapping TypeName="PlanetWroxModel.Genre"><MappingFragment StoreEntitySet="Genre">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Review"><EntityTypeMapping TypeName="PlanetWroxModel.Review"><MappingFragment StoreEntitySet="Review">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Summary" ColumnName="Summary" />
+            <ScalarProperty Name="Body" ColumnName="Body" />
+            <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+            <ScalarProperty Name="Authorized" ColumnName="Authorized" />
+            <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+            <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PhotoAlbum">
+            <EntityTypeMapping TypeName="PlanetWroxModel.PhotoAlbum">
+              <MappingFragment StoreEntitySet="PhotoAlbum">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Picture">
+            <EntityTypeMapping TypeName="PlanetWroxModel.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="PhotoAlbumId" ColumnName="PhotoAlbumId" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="ToolTip" ColumnName="ToolTip" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="PlanetWrox">
+        <EntityTypeShape EntityType="PlanetWroxModel.Genre" Width="1.5" PointX="0.75" PointY="1.5" Height="1.7879850260416668" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlanetWroxModel.Review" Width="1.5" PointX="3" PointY="1" Height="2.7494921874999996" IsExpanded="true" />
+        <AssociationConnector Association="PlanetWroxModel.FK_Review_Genre" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.3939925130208333" />
+          <ConnectorPoint PointX="3" PointY="2.3939925130208333" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="PlanetWroxModel.PhotoAlbum" Width="1.5" PointX="0.75" PointY="5.25" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="PlanetWroxModel.Picture" Width="1.5" PointX="3" PointY="4.875" Height="2.1725878906249996" />
+        <AssociationConnector Association="PlanetWroxModel.FK_Picture_PhotoAlbum" >
+          <ConnectorPoint PointX="2.25" PointY="6.047841796875" />
+          <ConnectorPoint PointX="3" PointY="6.047841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,9 @@
+﻿Hi there,
+
+A user has left the following feedback at the site:
+
+Name:              ##Name##
+E-mail address:    ##Email##
+Home phone:        ##HomePhone##
+Business phone:    ##BusinessPhone##
+Comments:          ##Comments##

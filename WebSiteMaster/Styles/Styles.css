@@ -1,0 +1,29 @@
+﻿/*gallery style*/
+
+.ItemContainer
+{
+    width: 600px;
+    list-style-type: none;
+    clear:both;    
+}
+
+
+.ItemContainer li
+{
+    height: 300px;
+    width: 200px;
+    float: left;
+}
+
+
+.ItemContainer li img
+{
+    width: 180px;
+    margin: 10px 20px 10px 0;
+}
+
+.Summary
+{
+    font-style:italic;
+    display:block;
+}

@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Frontend.master.cs" Inherits="MasterPages_Frontend" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+  <title></title>
+  <asp:ContentPlaceHolder ID="head" runat="server">
+  </asp:ContentPlaceHolder>
+  <link href="../Styles/Styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <form id="form1" runat="server">
+  <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="True">
+    <Scripts>
+        <asp:ScriptReference Path="~/Scripts/jquery-1.4.1.min.js" />
+    </Scripts>
+  </asp:ScriptManager>
+  <div id="PageWrapper">
+    <div id="Header"><a href="~/" runat="server"></a></div>
+    <div id="MenuWrapper">
+      <asp:Menu ID="Menu1" runat="server" CssClass="MainMenu" DataSourceID="SiteMapDataSource1" Orientation="Horizontal" StaticEnableDefaultPopOutImage="False">
+      </asp:Menu>
+      <asp:TreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1" ShowExpandCollapse="False">
+        <LevelStyles>
+          <asp:TreeNodeStyle CssClass="FirstLevelMenuItems" />
+        </LevelStyles>
+      </asp:TreeView>
+      <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />
+    </div>
+    <div id="MainContent">
+      <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+      </asp:SiteMapPath>
+      <br />
+      <br />
+      <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
+      </asp:ContentPlaceHolder>
+    </div>
+    <div id="Sidebar">Select a Theme<br />
+      <asp:DropDownList ID="ThemeList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ThemeList_SelectedIndexChanged">
+        <asp:ListItem>Monochrome</asp:ListItem>
+        <asp:ListItem>DarkGrey</asp:ListItem>
+      </asp:DropDownList>
+      <br />
+      <br />
+      <br />
+      <Wrox:Banner ID="Banner1" runat="server" DisplayDirection="Vertical" />
+    </div>
+    <div id="Footer">
+        <asp:LoginName ID="LoginName1" runat="server" FormatString="Logged In as {0}" />
+        <asp:LoginView ID="LoginView1" runat="server">
+            <LoggedInTemplate>
+                (<asp:LoginStatus ID="LoginStatus1" runat="server" />)
+            </LoggedInTemplate>
+            <RoleGroups>
+                <asp:RoleGroup Roles="Managers">
+                    <ContentTemplate>
+                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Management/Default.aspx">Manage Site</asp:HyperLink>
+                        or <asp:LoginStatus ID="LoginStatus2" runat="server" />
+                    </ContentTemplate>
+                </asp:RoleGroup>
+            </RoleGroups>
+        </asp:LoginView>
+    </div>
+  </div>
+    <asp:ContentPlaceHolder ID="cpClientScript" runat="server">
+    </asp:ContentPlaceHolder>
+  </form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+*
+{
+  font-family: Verdana, Arial, Sans-Serif;
+}
+
+body
+{
+  font-size: 80%;
+}
+
+.GridView, .GridView a
+{
+  color: #000;
+  text-decoration: none;
+}
+
+.GridViewHeaderStyle th, .GridViewPagerStyle
+{
+  background-color: #BCD1FE;
+  background-repeat: no-repeat;
+  background-position: 0 5px;
+  text-align: left;
+}
+
+.GridViewAlternatingRowStyle
+{
+  background-color: #e1e1e1;
+}
+
+.GridViewSortedAscendingHeaderStyle, .GridViewSortedDescendingHeaderStyle
+{
+  padding-left: 20px;
+}
+
+.GridViewSortedAscendingHeaderStyle
+{
+  background-image: url(Images/SortAscending.png);
+}
+
+.GridViewSortedDescendingHeaderStyle
+{
+  background-image: url(Images/SortDescending.png);
+}
+
+a.aspNetDisabled
+{
+  color: #CCC;
+}
+
+.ErrorMessage
+{
+    color:Red;
+    font-weight:bold;
+}
